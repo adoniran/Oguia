@@ -6,7 +6,10 @@
             <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/oguia/Oguia.java</file>
             <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/entidades/Usuario.java</file>
             <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/entidades/Local.java</file>
+            <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/entidades/UsuarioJpaController.java</file>
             <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/entidades/Atividade.java</file>
+            <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/entidades/AtividadeJpaController.java</file>
+            <file>file:/C:/Users/adoniran/Documents/NetBeansProjects/Oguia/src/META-INF/persistence.xml</file>
         </group>
     </open-files>
 </project-private>

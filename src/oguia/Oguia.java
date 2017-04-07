@@ -6,6 +6,7 @@
 package oguia;
 
 
+import entidades.Atividade;
 import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -32,11 +34,13 @@ public class Oguia {
         Date data = new Date(1980, 5, 26);
         Usuario novoUser = criaUsuario("adoniran",data,"damashio@gorute.com","123456ff");
         
-        EntityManagerFactory emf=null;
+        EntityManagerFactory emf = null;        
         EntityManager gerente = emf.createEntityManager();
+     //acha usuario   
+    gerente.find(Usuario.class, 2);
         addUsuario(gerente, novoUser);
     }
-    
+     
     
     public static Usuario criaUsuario( String nome, Date dataNasc, String email, String senha){
     Usuario novoUser = new Usuario();
@@ -53,7 +57,7 @@ public class Oguia {
          try {
            
             em.getTransaction().begin();           
-            em.persist(user);           
+            em.persist(user);         
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,4 +65,28 @@ public class Oguia {
             }
         }
     }
+    private static void Remove(EntityManager em, Usuario user) {
+         try {
+           
+            em.getTransaction().begin();
+            
+            //remove lista de atividades do usuario antes de remover para nao ficar filhos orfaos
+            Collection<Atividade> atividadeCollection = user.getAtividadeCollection();
+                //percorre a coleção e remove os usuarios
+            for (Atividade CollectionAtividade : atividadeCollection) {
+                CollectionAtividade.getUsuarioCollection().remove(user);
+                CollectionAtividade = em.merge(CollectionAtividade);
+            }
+            
+                em.remove(user);            
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
+    
+    
 }
