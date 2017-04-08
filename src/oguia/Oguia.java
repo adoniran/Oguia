@@ -8,13 +8,11 @@ package oguia;
 
 import entidades.Atividade;
 import entidades.Usuario;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -33,12 +31,15 @@ public class Oguia {
                 //c.set(1980, 5, 26);
         Date data = new Date(1980, 5, 26);
         Usuario novoUser = criaUsuario("adoniran",data,"damashio@gorute.com","123456ff");
-        
-        EntityManagerFactory emf = null;        
-        EntityManager gerente = emf.createEntityManager();
+        //"OguiaPU"EntityManagerFactory  emf =null;
+       EntityManagerFactory  emf = Persistence.createEntityManagerFactory("OguiaPU");
+             
+        EntityManager gerente;
+        gerente = emf.createEntityManager();
      //acha usuario   
     gerente.find(Usuario.class, 2);
         addUsuario(gerente, novoUser);
+        emf.close();
     }
      
     
